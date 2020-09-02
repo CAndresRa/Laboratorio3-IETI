@@ -11,7 +11,7 @@ https://ietilab3.z13.web.core.windows.net/
 
 * Ieti
 
-https://dashboard.heroku.com/apps/tranquil-headland-51286
+https://tranquil-headland-51286.herokuapp.com/
 
 ------
 
