@@ -9,7 +9,7 @@
 
 https://ietilab3.z13.web.core.windows.net/
 
-* Ieti
+* Heroku
 
 https://tranquil-headland-51286.herokuapp.com/
 
