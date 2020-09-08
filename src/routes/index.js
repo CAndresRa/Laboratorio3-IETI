@@ -28,23 +28,23 @@ const items = [{
       "email": "andres@gmail.com"
     },
     "status": "ready",
-    "dueDate": 156464645646
+    "dueDate": 126464645646
 },{
-    "description": "Ieti - lab",
-    "responsible": {
-      "name": "Carlos Ramirez",
-      "email": "andres@gmail.com"
-    },
-    "status": "ready",
-    "dueDate": 156464645646
-}, {
     "description": "Ieti - lab",
     "responsible": {
       "name": " Carlos Andres Ramirez",
       "email": "andres@gmail.com"
     },
     "status": "ready",
-    "dueDate": 156464645646
+    "dueDate": 166484645646
+}, {
+    "description": "Ieti - lab",
+    "responsible": {
+      "name": "Carlos Ramirez",
+      "email": "andres@gmail.com"
+    },
+    "status": "ready",
+    "dueDate": 156474645646
 }, ];
 
 

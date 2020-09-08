@@ -57,7 +57,7 @@ export class NewTask extends Component{
 
     setStatus(currentStatus){
         this.setState({
-            open: currentStatus
+            status: currentStatus
           }, () => {
             console.log("Status: ", currentStatus);
         });
@@ -81,7 +81,7 @@ export class NewTask extends Component{
                         <AddIcon />
                 </Fab>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                    <DialogTitle id="form-dialog-title">Nueva tarea</DialogTitle>
                     <DialogContent>
                     <DialogContentText>
                         Agregue una nueva tarea.
