@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Taks} from './Taks';
+import {NewTask} from './NewTask';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -30,8 +31,17 @@ export class TaksList extends Component{
         this.handleChangeOrderByUsers = this.handleChangeOrderByUsers.bind(this);
         this.handleChangeOrderByDate = this.handleChangeOrderByDate.bind(this);
         this.handleOriginalList = this.handleOriginalList.bind(this);
+        this.addTask = this.addTask.bind(this);
 
     }
+
+    addTask(task){
+        console.log(task);
+        this.setState(prev => ({
+            items: [...prev.items, task],
+        }));
+    }
+
 
 
 
@@ -95,6 +105,10 @@ export class TaksList extends Component{
     }
 
     render() {
+
+            
+
+
         const taksList = this.state.items.map((item, i) => {
             return(
                 <Taks key={i} description={item.description} dueDate={item.dueDate} responsible={item.responsible} status={item.status}/>
@@ -102,7 +116,11 @@ export class TaksList extends Component{
         });
 
         return (
-            <div>          
+            <div>
+                <div style = {{ margin: "35px"}}>
+                    <NewTask addTask = {this.addTask} />  
+                </div>
+                  
                 <div>
                     
                     <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
@@ -127,7 +145,7 @@ export class TaksList extends Component{
                                 onChange={this.handleChangeOrderByStatus}
                             >
                                 <MenuItem value={"ready"}>Ready</MenuItem>
-                                <MenuItem value={"inprogress"}>InProgress</MenuItem>
+                                <MenuItem value={"InProgress"}>InProgress</MenuItem>
                                 <MenuItem value={"done"}>Done</MenuItem>
                             </Select>
                         </FormControl>

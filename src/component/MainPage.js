@@ -18,9 +18,6 @@ export class MainPage extends Component{
         return(
             <div>
                 <NavBar />
-                <div style = {{ margin: "35px"}}>
-                    <NewTask />
-                </div>
                 <TaksList taksList={this.state.items} />
             </div>
         );

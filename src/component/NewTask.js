@@ -25,10 +25,14 @@ import moment from "moment";
 export class NewTask extends Component{
     constructor(props){
         super(props);
+        console.log(this.props);
         this.state = {
             open : false,
             status : '',
-            dueDate: moment()
+            dueDate: moment(),
+            description : '',
+            name : '',
+            email : ''
         }
         this.setOpen = this.setOpen.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -36,6 +40,12 @@ export class NewTask extends Component{
         this.setStatus = this.setStatus.bind(this);
         this.handleChangeStatus = this.handleChangeStatus.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeEmail = this.handleChangeEmail.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.setState = this.setState.bind(this);
+
     }
 
     setOpen(action){
@@ -56,21 +66,43 @@ export class NewTask extends Component{
     }
 
     setStatus(currentStatus){
-        this.setState({
+        this.setState = {
             status: currentStatus
-          }, () => {
-            console.log("Status: ", currentStatus);
-        });
+        };
     }
 
     handleChangeStatus(event){
-        this.setStatus(event.target.value);
+        this.setState({status : event.target.value});
     }
 
     handleDateChange(date) {
+        console.log(date);
         this.setState({
             dueDate: date
         });
+    }
+
+    handleChangeDescription(event){
+        event.preventDefault();
+        this.setState({description : event.target.value});
+    }
+
+    handleChangeName(event){
+        event.preventDefault();
+        this.setState({name : event.target.value});
+    }
+
+    handleChangeEmail(event){
+        console.log("Email " + event.target.value);
+        event.preventDefault();
+        this.setState({email : event.target.value});
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        var task = {"description":this.state.description, "responsible":{"name":this.state.name, "email":this.state.email}, "status":this.state.status, "dueDate":this.state.dueDate };
+        this.props.addTask(task);
+        this.handleClose();
     }
 
 
@@ -80,71 +112,78 @@ export class NewTask extends Component{
                 <Fab color="primary" aria-label="add" onClick={this.handleClickOpen}>
                         <AddIcon />
                 </Fab>
+                
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">New Task</DialogTitle>
                     <DialogContent>
                     <DialogContentText>
                         Add New Task.
                     </DialogContentText>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="description">Description</InputLabel>
-                            <Input id="description" 
-                                   type="text"
-                                   name="description" 
-                            autoFocus />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="name">Name</InputLabel>
-                            <Input
-                                name="name"
-                                type="text"
-                                id="name"
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="email">Email</InputLabel>
-                            <Input
-                                name="email"
-                                type="text"
-                                id="email"
-                            />
-                        </FormControl>
-                        <FormControl >
-                            <InputLabel id="demo-simple-select-label">Status</InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={this.state.status}
-                                onChange={this.handleChangeStatus}
-                            >
-                                <MenuItem value={"Ready"}>Ready</MenuItem>
-                                <MenuItem value={"InProgress"}>InProgress</MenuItem>
-                                <MenuItem value={"Done"}>Done</MenuItem>
-                            </Select>
-                        </FormControl>
-                        <div>
-                            <br/>
-                            <FormControl >
-                                <DatePicker
-                                    id="due-date"
-                                    selected={this.state.dueDate}
-                                    placeholderText="Due date"
-                                    onChange={this.handleDateChange}>
-                                </DatePicker>
+                        <form className="form" onSubmit={this.handleSubmit}>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="description">Description</InputLabel>
+                                <Input id="description" 
+                                    type="text"
+                                    name="description" 
+                                    onChange={this.handleChangeDescription}
+                                autoFocus />
                             </FormControl>
-                        </div>
-
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="name">Name</InputLabel>
+                                <Input
+                                    name="name"
+                                    type="text"
+                                    id="name"
+                                    onChange={this.handleChangeName}
+                                />
+                            </FormControl>
+                            <FormControl margin="normal" required fullWidth>
+                                <InputLabel htmlFor="email">Email</InputLabel>
+                                <Input
+                                    name="email"
+                                    type="text"
+                                    id="email"
+                                    onChange={this.handleChangeEmail}
+                                />
+                            </FormControl>
+                            <FormControl >
+                                <InputLabel id="demo-simple-select-label">Status</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    onChange={this.handleChangeStatus}
+                                >
+                                    <MenuItem value={"Ready"}>Ready</MenuItem>
+                                    <MenuItem value={"InProgress"}>InProgress</MenuItem>
+                                    <MenuItem value={"Done"}>Done</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <div>
+                                <br/>
+                                <FormControl >
+                                    <DatePicker
+                                        id="due-date"
+                                        selected={this.state.dueDate}
+                                        placeholderText="Due date"
+                                        onChange={this.handleDateChange}>
+                                    </DatePicker>
+                                </FormControl>
+                            </div>  
+                            <Button type="submit" color="primary">
+                                Add
+                            </Button>
+                        </form >
                     </DialogContent>
                     <DialogActions>
+
                     
                     <Button onClick={this.handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button onClick={this.handleClose} color="primary">
-                        Add
-                    </Button>
                     </DialogActions>
+                    
                 </Dialog>
+                
             </div>
 
         );
