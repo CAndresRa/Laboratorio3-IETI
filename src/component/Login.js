@@ -16,6 +16,7 @@ export class Login extends Component{
     render(){
         return (
             <div className="login-form">
+                <h1>Login</h1>
                 <FormControl margin="normal" required fullWidth>
                     <InputLabel htmlFor="email">Email Address</InputLabel>
                     <Input id="email" name="email" autoComplete="email" autoFocus />

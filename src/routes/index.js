@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import {Login} from '../component/Login';
 import {MainPage} from '../component/MainPage';
+import {UserProfile} from '../component/UserProfile';
 
 export class Routes extends Component{
 
@@ -15,6 +16,7 @@ export class Routes extends Component{
                 <Switch>
                     <Route path="/" exact component = {Login} />
                     <Route path="/mainpage" exact component = {MainPageView} />
+                    <Route path="/userprofile" exact component = {UserProfile} />
                 </Switch>
             </Router>
         )
@@ -35,7 +37,7 @@ const items = [{
       "name": " Carlos Andres Ramirez",
       "email": "andres@gmail.com"
     },
-    "status": "ready",
+    "status": "done",
     "dueDate": 166484645646
 }, {
     "description": "Ieti - lab",

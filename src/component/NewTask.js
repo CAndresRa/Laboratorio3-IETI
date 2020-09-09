@@ -81,10 +81,10 @@ export class NewTask extends Component{
                         <AddIcon />
                 </Fab>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Nueva tarea</DialogTitle>
+                    <DialogTitle id="form-dialog-title">New Task</DialogTitle>
                     <DialogContent>
                     <DialogContentText>
-                        Agregue una nueva tarea.
+                        Add New Task.
                     </DialogContentText>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="description">Description</InputLabel>

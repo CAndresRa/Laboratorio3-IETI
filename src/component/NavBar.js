@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export  function NavBar(){
+export function NavBar(){
     const classes = useStyles();
 
     const [state, setState] = React.useState({
@@ -97,9 +97,10 @@ export  function NavBar(){
             </Drawer>
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              Taks
+              <Button style={{fontSize: '20px'}} color="inherit" href="/mainpage">Taks</Button>
             </Typography>
-            <Button color="inherit" href="/">Salir</Button>
+            <Button color="inherit" href="/userprofile">Update Profile</Button>
+            <Button color="inherit" href="/">Exit</Button>
           </Toolbar>
         </AppBar>
       </div>

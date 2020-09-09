@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
+
 export class TaksList extends Component{
     constructor(props){
         super(props);
@@ -20,15 +21,19 @@ export class TaksList extends Component{
         this.state = {
             items : this.props.taksList,
             open : false,
+            original : this.props.taksList
         }
         this.setOpen = this.setOpen.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
-        this.handleChangeStatus = this.handleChangeOrderByStatus.bind(this);
+        this.handleChangeOrderByStatus = this.handleChangeOrderByStatus.bind(this);
         this.handleChangeOrderByUsers = this.handleChangeOrderByUsers.bind(this);
         this.handleChangeOrderByDate = this.handleChangeOrderByDate.bind(this);
+        this.handleOriginalList = this.handleOriginalList.bind(this);
 
     }
+
+
 
     setOpen(action){
         console.log(action)
@@ -49,6 +54,13 @@ export class TaksList extends Component{
 
     handleChangeOrderByStatus(event){
         console.log("Click order by Status" , event.target.value);
+        const byStatus = this.state.items.filter(status => status.status === event.target.value);
+        this.setState({
+            items: byStatus
+          }, () => {
+            console.log("ChangeOrderByStatus: ", this.state);
+        });
+        this.handleClose();
         
     }
 
@@ -58,7 +70,7 @@ export class TaksList extends Component{
         this.setState({
             items: sortedNames
           }, () => {
-            console.log("Open: ", this.state);
+            console.log("ChangeOrderByUserName: ", this.state);
         });
         this.handleClose();
     }
@@ -69,9 +81,17 @@ export class TaksList extends Component{
         this.setState({
             items: sortedDates
           }, () => {
-            console.log("Open: ", this.state);
+            console.log("ChangeOrderByDate: ", this.state);
         });
         this.handleClose();
+    }
+
+    handleOriginalList(){
+        this.setState({
+            items: this.state.original
+          }, () => {
+            console.log("Original: ", this.state);
+        });
     }
 
     render() {
@@ -84,12 +104,12 @@ export class TaksList extends Component{
         return (
             <div>          
                 <div>
-                    <Button color="primary" aria-label="add" onClick={this.handleClickOpen}>Filtrar</Button>
+                    
                     <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Filtrar por</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Filter By</DialogTitle>
                         <DialogContent>
                         <DialogContentText>
-                            Seleccione la opcion para ordenar la lista.
+                            Select a option to filter in list.
                         </DialogContentText>
                         <FormControl >
                             <Button color="primary" aria-label="add" onClick={this.handleChangeOrderByUsers}>Ordenar por nombre</Button>
@@ -98,7 +118,7 @@ export class TaksList extends Component{
                             <br></br>
 
                         <FormControl >
-                            <label>Ordenar por estado</label>
+                            <label>Order By Status</label>
                             <InputLabel id="demo-simple-select-label"></InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
@@ -116,9 +136,8 @@ export class TaksList extends Component{
                         <br></br>
 
                         <FormControl >
-                            <Button color="primary" aria-label="add" onClick={this.handleChangeOrderByDate}>Ordenar por fecha</Button>
+                            <Button color="primary" aria-label="add" onClick={this.handleChangeOrderByDate}>Order By Date</Button>
                         </FormControl>
-
 
                         </DialogContent>
                     </Dialog>
@@ -126,6 +145,8 @@ export class TaksList extends Component{
 
 
                 <div style = {{padding : "250px", paddingTop: "35px"}}>
+                    <Button color="primary" aria-label="add" onClick={this.handleClickOpen}>Filter</Button>
+                    <Button onClick={this.handleOriginalList} color="primary">Remove Filter</Button>
                     {taksList}
                 </div>
             </div>

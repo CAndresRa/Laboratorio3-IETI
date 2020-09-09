@@ -22,8 +22,6 @@ export class MainPage extends Component{
                     <NewTask />
                 </div>
                 <TaksList taksList={this.state.items} />
-
-                
             </div>
         );
     }
